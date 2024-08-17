@@ -1,7 +1,7 @@
 # Python-Port-Forwarding
 Multi-threaded port forwarding implementation with python3.  
 The purpose of this project is for setup port quickly and easily.  
-This is helpful if the chisel/ssh/ligolo-ng setup is confusing you, and need somethign set up quick.  
+This is helpful if the chisel/ssh/ligolo-ng setup is confusing you, and need something set up quick.  
 This also helps in situations in which you're having trouble compiling for the target.
 
 ---
