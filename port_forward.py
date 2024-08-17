@@ -1,9 +1,9 @@
+#!/usr/bin/python3
 import argparse
 import select
 import socket
 from sys import exit
 import threading
-from time import sleep
 
 def verify_port(port: str) -> int:
     if int(port) > 65535 or int(port) < 1:
@@ -21,7 +21,7 @@ def init_args():
 
 
 def client(conn, addr):
-    print(f"Incoming Connection from {addr[0]}:{addr[1]}")
+    print(f"[*] Incoming Connection from {addr[0]}:{addr[1]}")
     READ_ONLY = select.POLLIN | select.POLLPRI | select.POLLHUP | select.POLLERR
     READ_WRITE = READ_ONLY | select.POLLOUT
     TIMEOUT = 100
@@ -42,8 +42,10 @@ def client(conn, addr):
                 data = s.recv(1024)
                 if data:
                     if s is conn:
+                        print(f"[*] Sent {len(data)} bytes to target")
                         out.sendall(data)
                     elif s is out:
+                        print(f"[*] Sent {len(data)} bytes to client")
                         conn.sendall(data)
                 else:
                     return
@@ -58,10 +60,3 @@ if __name__ == "__main__":
     while True:
         conn, addr = serv_sock.accept()
         threading.Thread(target=client, args=(conn, addr)).start()
-
-    
-
-
-
-    
-            
